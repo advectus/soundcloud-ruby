@@ -3,11 +3,11 @@ module SoundCloud
     include HTTMultiParty
     USER_AGENT            = "SoundCloud Ruby Wrapper #{VERSION}"
     CLIENT_ID_PARAM_NAME  = :client_id
-    API_SUBHOST           = 'api'
     AUTHORIZE_PATH        = '/connect'
     TOKEN_PATH            = '/oauth2/token'
     DEFAULT_OPTIONS       = {
       :site              => 'soundcloud.com',
+      :api_subhost       => 'api',
       :on_exchange_token => lambda {}
     }
 
@@ -91,7 +91,7 @@ module SoundCloud
     alias host site
 
     def api_host
-      [API_SUBHOST, host].join('.')
+      [@options[:api_subhost], host].join('.')
     end
 
     def authorize_url(options={})
